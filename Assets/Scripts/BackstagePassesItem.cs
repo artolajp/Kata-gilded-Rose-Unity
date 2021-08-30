@@ -1,8 +1,8 @@
 ﻿namespace GildedRoseKata
 {
-    public class BackstagePassesItem : BasicItem
+    public class BackstagePassesItemHandler : ItemHandler
     {
-        public BackstagePassesItem(Item item) : base(item)
+        public BackstagePassesItemHandler(Item item) : base(item)
         {
         }
 

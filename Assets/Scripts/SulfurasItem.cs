@@ -1,18 +1,18 @@
 ﻿namespace GildedRoseKata
 {
-    public class SulfurasItem : BasicItem
+    public class SulfurasItemHandler : ItemHandler
     {
-        public SulfurasItem(Item item):base(item)
+        public SulfurasItemHandler(Item item):base(item)
         {
         }
 
         public override void UpdateQuality()
         {
-            
         }
 
         public override void DecreaseItemSellIn()
         {
         }
+        
     }
 }

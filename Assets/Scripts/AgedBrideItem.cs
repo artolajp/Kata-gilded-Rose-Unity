@@ -1,8 +1,8 @@
 ﻿namespace GildedRoseKata
 {
-    public class AgedBrideItem: BasicItem
+    public class AgedBrideItemHandler: ItemHandler
     {
-        public AgedBrideItem(Item item) :base (item)
+        public AgedBrideItemHandler(Item item) :base (item)
         {
         }
 

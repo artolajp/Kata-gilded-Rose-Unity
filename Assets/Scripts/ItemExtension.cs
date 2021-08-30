@@ -2,12 +2,13 @@
 
 namespace GildedRoseKata
 {
-    public class BasicItem 
+    public class ItemHandler
     {
         private const int MAXQuality = 50;
-        
+
         protected readonly Item Item;
-        public BasicItem(Item item)
+
+        public ItemHandler(Item item)
         {
             Item = item;
         }
@@ -40,10 +41,9 @@ namespace GildedRoseKata
             if (Item.Quality < MAXQuality)
             {
                 Item.Quality += increaseValue;
-                
             }
         }
-        
+
         public virtual void UpdateQuality()
         {
             DecreaseItemSellIn();
