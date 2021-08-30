@@ -59,7 +59,7 @@ namespace GildedRoseKata
                         }
                         else
                         {
-                            item.Quality -= item.Quality;
+                            DropItemQuality(item);
                         }
                     }
                     else
@@ -68,6 +68,11 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private static void DropItemQuality(Item item)
+        {
+            item.Quality -= item.Quality;
         }
 
         private static void DegradeItemQualityBy1(Item item)
