@@ -43,13 +43,13 @@ namespace GildedRoseKata
 
             for (var i = 0; i < 31; i++)
             {
-                Console.WriteLine("-------- day " + i + " --------");
-                Console.WriteLine("name, sellIn, quality");
+                Debug.Log("-------- day " + i + " --------");
+                Debug.Log("name, sellIn, quality");
                 for (var j = 0; j < Items.Count; j++)
                 {
-                    System.Console.WriteLine(Items[j]);
+                    Debug.Log(Items[j]);
                 }
-                Console.WriteLine("");
+                Debug.Log("");
                 app.UpdateQuality();
             }
         }

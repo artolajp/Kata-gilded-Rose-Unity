@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GildedRoseKata
 {
@@ -10,7 +11,7 @@ namespace GildedRoseKata
 
         public GildedRose(IList<Item> items)
         {
-            this._items = items;
+            _items = items;
         }
 
         public void UpdateQuality()
@@ -19,7 +20,7 @@ namespace GildedRoseKata
             {
                 if (IsSulfurasItem(item))
                 {
-                    return;
+                    continue;
                 }
 
                 DecreaseItemSellIn(item);
@@ -27,38 +28,39 @@ namespace GildedRoseKata
                 if (IsAgedBrieItem(item))
                 {
                     IncreaseItemQualityBy(item, 1);
-                }
-                else if (IsBackstagePassesItem(item))
-                {
-                    if (item.SellIn <= 5)
-                    {
-                        IncreaseItemQualityBy(item, 3);
-                    }
-                    else if (item.SellIn <= 10)
-                    {
-                        IncreaseItemQualityBy(item, 2);
-                    }
-                }
-                else
-                {
-                    DegradeItemQualityBy1(item);
+                    
+                    continue;
                 }
 
-
-                if (IsExpiredItem(item))
+                if (IsBackstagePassesItem(item))
                 {
-                    if (IsAgedBrieItem(item))
-                    {
-                        IncreaseItemQualityBy(item, 1);
-                    }
-                    else if (IsBackstagePassesItem(item))
+                    if (IsExpiredItem(item))
                     {
                         DropItemQuality(item);
                     }
                     else
                     {
-                        DegradeItemQualityBy1(item);
+                        if (item.SellIn <= 5)
+                        {
+                            IncreaseItemQualityBy(item, 3);
+                        }
+                        else if (item.SellIn <= 10)
+                        {
+                            IncreaseItemQualityBy(item, 2);
+                        }
                     }
+
+                    continue;
+                }
+
+
+                if (IsExpiredItem(item))
+                {
+                    DegradeItemQualityBy(item, 2);
+                }
+                else
+                {
+                    DegradeItemQualityBy(item, 1);
                 }
             }
         }
@@ -93,11 +95,11 @@ namespace GildedRoseKata
             item.Quality -= item.Quality;
         }
 
-        private static void DegradeItemQualityBy1(Item item)
+        private static void DegradeItemQualityBy(Item item, int degradeValue)
         {
-            if (item.Quality > 0)
+            if (item.Quality != 0)
             {
-                item.Quality -= 1;
+                item.Quality = Math.Max(item.Quality - degradeValue, 0);
             }
         }
 
