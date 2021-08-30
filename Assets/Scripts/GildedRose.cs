@@ -5,8 +5,9 @@ namespace GildedRoseKata
     public class GildedRose
     {
         const int MAXQuality = 50;
-        
+
         private IList<Item> Items;
+
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
@@ -16,58 +17,70 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
-                if (item.Name == "Sulfuras, Hand of Ragnaros")
+                if (IsSulfurasItem(item))
                 {
                     return;
                 }
 
-                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    DegradeItemQualityBy1(item);
+                DecreaseItemSellIn(item);
 
+                if (IsAgedBrieItem(item))
+                {
+                    IncreaseItemQualityBy(item, 1);
+                }
+                else if (IsBackstagePassesItem(item))
+                {
+                    if (item.SellIn <= 5)
+                    {
+                        IncreaseItemQualityBy(item, 3);
+                    }
+                    else if (item.SellIn <= 10)
+                    {
+                        IncreaseItemQualityBy(item, 2);
+                    }
                 }
                 else
                 {
-                    if (item.Quality < MAXQuality)
-                    {
-                        IncreaseItemQualityBy(item, 1);
-                        
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (item.SellIn < 11)
-                            {
-                                IncreaseItemQualityBy(item, 1);
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                IncreaseItemQualityBy(item, 1);
-                            }
-                        }
-                    }
+                    DegradeItemQualityBy1(item);
                 }
-                
-                item.SellIn -= 1;
+
 
                 if (item.SellIn < 0)
                 {
-                    if (item.Name != "Aged Brie")
-                    {
-                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            DegradeItemQualityBy1(item);
-                        }
-                        else
-                        {
-                            DropItemQuality(item);
-                        }
-                    }
-                    else
+                    if (IsAgedBrieItem(item))
                     {
                         IncreaseItemQualityBy(item, 1);
                     }
+                    else if (IsBackstagePassesItem(item))
+                    {
+                        DropItemQuality(item);
+                    }
+                    else
+                    {
+                        DegradeItemQualityBy1(item);
+                    }
                 }
             }
+        }
+
+        private static bool IsBackstagePassesItem(Item item)
+        {
+            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
+        }
+
+        private static bool IsAgedBrieItem(Item item)
+        {
+            return item.Name == "Aged Brie";
+        }
+
+        private static bool IsSulfurasItem(Item item)
+        {
+            return item.Name == "Sulfuras, Hand of Ragnaros";
+        }
+
+        private static void DecreaseItemSellIn(Item item)
+        {
+            item.SellIn -= 1;
         }
 
         private static void DropItemQuality(Item item)
