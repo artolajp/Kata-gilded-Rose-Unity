@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GildedRoseKata
 {
-    public class Program
+    public class Program: MonoBehaviour
     {
-        public static void Main(string[] args)
+        public void Start()
         {
             Console.WriteLine("OMGHAI!");
 

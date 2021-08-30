@@ -4,18 +4,18 @@ namespace GildedRoseKata
 {
     public class GildedRose
     {
-        const int MAXQuality = 50;
+        private const int MAXQuality = 50;
 
-        private IList<Item> Items;
+        private readonly IList<Item> _items;
 
-        public GildedRose(IList<Item> Items)
+        public GildedRose(IList<Item> items)
         {
-            this.Items = Items;
+            this._items = items;
         }
 
         public void UpdateQuality()
         {
-            foreach (var item in Items)
+            foreach (var item in _items)
             {
                 if (IsSulfurasItem(item))
                 {
@@ -45,7 +45,7 @@ namespace GildedRoseKata
                 }
 
 
-                if (item.SellIn < 0)
+                if (IsExpiredItem(item))
                 {
                     if (IsAgedBrieItem(item))
                     {
@@ -61,6 +61,11 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private static bool IsExpiredItem(Item item)
+        {
+            return item.SellIn < 0;
         }
 
         private static bool IsBackstagePassesItem(Item item)
