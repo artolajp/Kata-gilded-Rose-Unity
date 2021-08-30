@@ -28,7 +28,7 @@ namespace GildedRoseKata
             Item.Quality = 0;
         }
 
-        private void DegradeItemQualityBy(int degradeValue)
+        protected virtual void DegradeItemQualityBy(int degradeValue)
         {
             if (Item.Quality != 0)
             {

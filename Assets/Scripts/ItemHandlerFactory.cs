@@ -16,25 +16,35 @@
             {
                 return new BackstagePassesItemHandler(item);
             }
+            else if(IsConjuredItem(item))
+            {
+                return new ConjuredItemHandler(item);
+
+            }
             else
             {
                 return new ItemHandler(item);
             }
         }
 
-        private static bool IsBackstagePassesItem(Item item)
+        private bool IsBackstagePassesItem(Item item)
         {
             return item.Name == "Backstage passes to a TAFKAL80ETC concert";
         }
 
-        private static bool IsAgedBrieItem(Item item)
+        private bool IsAgedBrieItem(Item item)
         {
             return item.Name == "Aged Brie";
         }
 
-        private static bool IsSulfurasItem(Item item)
+        private bool IsSulfurasItem(Item item)
         {
             return item.Name == "Sulfuras, Hand of Ragnaros";
+        }
+
+        private bool IsConjuredItem(Item item)
+        {
+            return item.Name == "Conjured";
         }
     }
 }

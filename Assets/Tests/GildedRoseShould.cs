@@ -9,7 +9,7 @@ namespace EditorTests
     public class GildedRoseShould
     {
         [Test(Description = "Once the sell by date has passed, Quality degrades twice as fast")]
-        public void DegradeTwiceAsFast_TheItemQuality_WhenTheSellByDateHasPassed() {
+        public void DegradeTwiceAsFast_TheItemQuality_WhenTheItemHasPassed() {
             
             IList<Item> items = GetItemsFrom(sellIn: 0, quality:4);
             var app = new GildedRose(items);
@@ -74,11 +74,7 @@ namespace EditorTests
 
             Assert.AreEqual(20, items[0].SellIn);
         }
-/*
- “Backstage passes”, like aged brie, increases in Quality as its SellIn value approaches;
-Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
-Quality drops to 0 after the concert
-*/
+        
         [Test(Description = "“Backstage passes” Quality increases by 2 when there are 10 days or less")]
         public void IncreaseBy2_OnBackstagePassesQuality_WhenThereAreTenOrLessDaysToSellIn()
         {
@@ -110,6 +106,17 @@ Quality drops to 0 after the concert
             app.UpdateQuality();
 
             Assert.AreEqual(0, items[0].Quality);
+        }
+        
+        [Test(Description = "“Conjured” items degrade in Quality twice as fast as normal items")]
+        public void DegradeTwiceAsFast_OnConjuredItem()
+        {
+            IList<Item> items = GetItemsFrom(name: "Conjured", sellIn: 10, quality:10); 
+            var app = new GildedRose(items);
+
+            app.UpdateQuality();
+
+            Assert.AreEqual(8, items[0].Quality);
         }
 
         private static IList<Item> GetItemsFrom(string name = "foo",int sellIn = 0, int quality = 0 )
