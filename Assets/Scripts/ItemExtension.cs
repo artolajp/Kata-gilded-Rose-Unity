@@ -28,7 +28,7 @@ namespace GildedRoseKata
             Item.Quality = 0;
         }
 
-        protected void DegradeItemQualityBy(int degradeValue)
+        private void DegradeItemQualityBy(int degradeValue)
         {
             if (Item.Quality != 0)
             {
@@ -47,14 +47,7 @@ namespace GildedRoseKata
         public virtual void UpdateQuality()
         {
             DecreaseItemSellIn();
-            if (IsExpired())
-            {
-                DegradeItemQualityBy(2);
-            }
-            else
-            {
-                DegradeItemQualityBy(1);
-            }
+            DegradeItemQualityBy(IsExpired() ? 2 : 1);
         }
     }
 }
