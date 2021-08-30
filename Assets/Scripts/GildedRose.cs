@@ -8,13 +8,13 @@ namespace GildedRoseKata
 
         public GildedRose(IList<Item> items)
         {
-            var itemHandlerfactory = new ItemHandlerFactory();
+            var itemHandlerFactory = new ItemHandlerFactory();
             
             _items = new List<ItemHandler>(items.Count);
             
             foreach (var item in items)
             {
-                ItemHandler newItemHandler = itemHandlerfactory.GetItemHandler(item);
+                ItemHandler newItemHandler = itemHandlerFactory.GetItemHandler(item);
                 _items.Add(newItemHandler);
             }
         }
